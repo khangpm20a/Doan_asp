@@ -1,0 +1,31 @@
+﻿@model Cart
+@{
+    Layout = "_Cart";
+
+}
+<h1>@ViewBag.Phone </h1>
+<form asp-action="Purchase">
+    <div class="form-group">
+        <label class="control-label">Địa chỉ giao hàng: </label>
+        <input type="text" class="form-control" name="Address" value="@ViewBag.Address" />
+        <span asp-validation-for="Account.Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label class="control-label">Số điện thoại người nhận: </label>
+        <input type="text" class="form-control" name="Phone" value="@ViewBag.Phone" />
+        <span asp-validation-for="Account.Phone" class="text-danger"></span>
+    </div>
+    <button class="btn btn-success">Đặt hàng</button>
+    @{if(null != TempData["alertMessage"])
+    {
+        <script type="text/javascript">
+            alert("@TempData["alertMessage"]");
+        </script>
+    }
+    }
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

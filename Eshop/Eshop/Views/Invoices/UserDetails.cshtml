@@ -1,0 +1,68 @@
+﻿@model IEnumerable<InvoiceDetail>
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_Layout";
+}
+
+<h1>Chi tiết đơn hàng</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Ảnh
+                </th>
+                <th>
+                    Tên sản phẩm
+                </th>
+                <th>
+                    Số lượng
+                </th>
+                <th>
+                    Đơn giá
+                </th>
+                <th>
+                    Thành tiền
+                    
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/product/@item.Product.Image" style="width:100px; " />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @{
+                            @(String.Format("{0:0,0 VNĐ}", (item.Product.Price)))
+                            ;
+
+                        }
+                    </td>
+                    <td>
+
+                        @{
+                            @(String.Format("{0:0,0 VNĐ}", (item.Quantity * item.Product.Price)))
+                            ;
+
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="UserIndex" asp-controller="Invoices" class="btn btn-primary">Back to Invoices</a>
+</div>

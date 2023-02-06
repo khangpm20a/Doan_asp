@@ -1,0 +1,47 @@
+﻿@model Eshop.Models.ProductType
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@{
+    Layout = "_admin";
+
+}
+<div class="container-fluid">
+    <h1 class="mt-4">Tạo mới Loại sản phẩm</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+        <li class="breadcrumb-item active">Tạo mới Loại sản phẩm</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="ProductTypes">Về danh sách</a>
+        </div>
+
+        <div class="card-body">
+            <div class="col-md-4">
+                    <form asp-controller="ProductTypes" asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" required />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Status" required /> @Html.DisplayNameFor(model => model.Status)
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

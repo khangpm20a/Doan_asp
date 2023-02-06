@@ -1,0 +1,97 @@
+﻿@model Invoice
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_admin";
+    // var invoiceDetails = ViewBag.InvoiceDetails as List<InvoiceDetail>;
+}
+
+
+
+<div class="">
+    <div class="card">
+
+
+        <div class="card-header">
+            <a class="btn btn-success" asp-action="Index" asp-controller="Invoices">Về danh sách</a>
+        </div>
+
+
+        <div class="card-header p-4">
+            <div class="float-right">
+                <h3 class="mb-0">Invoice #@Model.Code</h3>
+                Date: @Model.IssuedDate
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-sm-6">
+                    <h5 class="mb-3">From:</h5>
+                    <h3 class="text-dark mb-1">K.H.A Store</h3>
+                    <div>65, Huỳnh Thúc Kháng</div>
+                    <div>Email: khastore@gmail.com</div>
+                    <div>Phone: +84 847583648</div>
+                </div>
+                <div class="col-sm-6 ">
+                    <h5 class="mb-3">To:</h5>
+                    <h3 class="text-dark mb-1">@Model.Account.FullName</h3>
+                    <div>@Model.ShippingAddress</div>
+
+                    <div>Email: @Model.Account.Email</div>
+                    <div>Phone: @Model.Account.Phone</div>
+                </div>
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="center">ID</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Description</th>
+                            <th class="right">Price</th>
+                            <th class="center">Qty</th>
+                            <th class="right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.InvoiceDetails)
+                        {
+                            <tr>
+                                <td class="center">@item.Product.Id</td>
+                                <td class="left strong">@item.Product.Name</td>
+                                <td class="left">@item.Product.Description</td>
+                                <td class="right">@item.Product.Price</td>
+                                <td class="center">@item.Quantity</td>
+                                @* <td class="right">$@item.Product.Price</td>*@
+                                <td class="right">@( item.Quantity * item.Product.Price)</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                </div>
+                <div class="col-lg-4 col-sm-5 ml-auto">
+                    <table class="table table-clear">
+                        <tbody>
+                            <tr></tr>
+                            <tr>
+                                <td class="left">
+                                    <strong class="text-dark">Total</strong>
+                                </td>
+                                <td class="right">
+                                    <strong class="text-dark">@Model.Total</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

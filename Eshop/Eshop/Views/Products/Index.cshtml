@@ -1,0 +1,47 @@
+﻿@{Layout ="_mainlayout";
+ViewData["Title"] = "Search";
+}
+@model IEnumerable<Product>
+}
+@section Manage {
+	<ul class="nav navbar-nav">
+		@if (ViewBag.User != null)
+		{
+			@if (ViewBag.idUser != null)
+			{
+				<li><a asp-area="" asp-controller="Admin" asp-action="Index">Manage <i class="fa fa-mage"></i></a></li>
+			}
+			<li><a asp-area="" asp-controller="Accounts" asp-action="UserDetails">@ViewBag.User <i class="far fa-id-badge"></i></a></li>
+			<li><a asp-area="" asp-controller="Carts" asp-action="Index">Cart <i class="fas fa-portrait"></i></a></li>
+			<li><a asp-area="" asp-controller="Accounts" asp-action="Logout">Logout <i class="fa fa-lock"></i></a></li>
+			<li><a asp-area="" asp-controller="Invoices" asp-action="UserIndex">Invoices <i></i></a></li>
+		}
+		else
+		{
+			<li><a asp-area="" asp-controller="Accounts" asp-action="Login">Sign In <i class="fa fa-sign-in" aria-hidden="true"></i></a></li>
+		}
+	</ul>
+}
+@foreach (var item in Model)
+{
+			<div class="col-sm-3">
+				<div class="product-image-wrapper">
+					<div class="single-products">
+						<div class="productinfo text-center">
+							<img src="~/images/product/@item.Image" style="width:100px; "/>
+							<h2>@item.Price</h2>
+							<p>@item.Name</p>
+							<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+						</div>
+						<div class="product-overlay">
+							<div class="overlay-content">
+								<h2>@item.Price</h2>
+								<p>@item.Name</p>							
+										<a asp-action="AddToCart" asp-controller="Carts" asp-route-Id="@item.Id" class="btn btn-default add-to-cart">Add to cart</a>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+}
